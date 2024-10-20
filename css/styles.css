@@ -1,0 +1,354 @@
+/* css/styles.css */
+
+/* Основные стили */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--background);
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Темы */
+:root {
+    --background: linear-gradient(135deg, #ece9e6, #ffffff);
+    --menubar-bg: #333;
+    --menubar-color: white;
+    --dock-bg: rgba(255, 255, 255, 0.8);
+    --window-bg: #f0f0f0;
+    --titlebar-bg: #0078d7;
+    --titlebar-color: white;
+    --icon-color: #333;
+    --context-menu-bg: white;
+    --context-menu-color: #333;
+    --notification-bg: #0078d7;
+    --notification-color: white;
+}
+
+body.dark-theme {
+    --background: linear-gradient(135deg, #2c3e50, #34495e);
+    --menubar-bg: #1c2833;
+    --menubar-color: #ecf0f1;
+    --dock-bg: rgba(44, 62, 80, 0.8);
+    --window-bg: #2c3e50;
+    --titlebar-bg: #2980b9;
+    --titlebar-color: #ecf0f1;
+    --icon-color: #ecf0f1;
+    --context-menu-bg: #34495e;
+    --context-menu-color: #ecf0f1;
+    --notification-bg: #2980b9;
+    --notification-color: #ecf0f1;
+}
+
+/* Менюбар */
+#menubar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: var(--menubar-bg);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    color: var(--menubar-color);
+    font-size: 14px;
+    z-index: 1000;
+}
+
+.menu {
+    margin-right: 20px;
+    cursor: pointer;
+    position: relative;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.menu:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.menu .dropdown {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background: var(--menubar-bg);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1001;
+}
+
+.menu:hover .dropdown {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: var(--menubar-color);
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Иконки статуса */
+.status-icons {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.status-icon {
+    margin-left: 15px;
+    cursor: pointer;
+    position: relative;
+}
+
+.status-icon i {
+    font-size: 16px;
+    color: var(--menubar-color);
+}
+
+/* Рабочий стол */
+#desktop {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    bottom: 50px; /* Высота Dock */
+    background-size: cover;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    overflow: auto;
+}
+
+.icon {
+    width: 80px;
+    margin: 15px;
+    text-align: center;
+    color: var(--icon-color);
+    cursor: pointer;
+    transition: transform 0.2s;
+    user-select: none;
+}
+
+.icon:hover {
+    transform: scale(1.2);
+}
+
+.icon i {
+    margin-bottom: 5px;
+}
+
+.icon span {
+    font-size: 12px;
+}
+
+/* Dock */
+#dock {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 50px;
+    background: var(--dock-bg);
+    border-top: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    transition: background 0.3s;
+}
+
+.dock-icon {
+    width: 40px;
+    margin: 0 10px;
+    text-align: center;
+    color: var(--icon-color);
+    cursor: pointer;
+    transition: transform 0.2s;
+    user-select: none;
+}
+
+.dock-icon:hover {
+    transform: scale(1.5);
+}
+
+/* Окна приложений */
+.app-window {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 600px;
+    height: 400px;
+    background: var(--window-bg);
+    border: 1px solid #ccc;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    display: none;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 500;
+}
+
+.title-bar {
+    height: 40px;
+    background: var(--titlebar-bg);
+    color: var(--titlebar-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    cursor: move;
+}
+
+.title-bar .window-controls {
+    display: flex;
+    align-items: center;
+}
+
+.window-controls span {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.content {
+    padding: 20px;
+    overflow: auto;
+    flex: 1;
+    color: var(--menubar-bg);
+}
+
+.content textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+/* Системные уведомления */
+#notifications {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    z-index: 2000;
+}
+
+.notification {
+    background: var(--notification-bg);
+    color: var(--notification-color);
+    padding: 15px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 0.5s forwards;
+}
+
+.notification-success {
+    background: #28a745;
+}
+
+.notification-error {
+    background: #dc3545;
+}
+
+.notification-warning {
+    background: #ffc107;
+    color: #333;
+}
+
+.notification-info {
+    background: var(--notification-bg);
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Контекстное меню */
+#context-menu {
+    position: absolute;
+    background: var(--context-menu-bg);
+    color: var(--context-menu-color);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1500;
+    width: 150px;
+}
+
+.context-item {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.context-item:hover {
+    background: rgba(0,0,0,0.1);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Темы переключатель */
+.theme-switcher {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 3000;
+    cursor: pointer;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.theme-switcher:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .app-window {
+        width: 90%;
+        height: 80%;
+        left: 5%;
+        top: 10%;
+    }
+
+    #dock {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px;
+    }
+
+    .dock-icon {
+        margin: 5px;
+    }
+}
