@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Mac OS Simulator 1.1</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <!-- Подключение Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-zG1JkQh1qNn6VbB5kQ5P1RdfT7jE6qYr2Vh5yt6e/O2pZpH0r4YvG/DsTk1W3GvEJrvx4D0hsDxrIAsQdq73Zw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <!-- Менюбар -->
+    <div id="menubar">
+        <div class="menu" id="apple-menu">
+            <i class="fas fa-apple-alt"></i> Apple
+            <div class="dropdown">
+                <div class="dropdown-item" id="about-mac">About This Mac</div>
+                <div class="dropdown-item" id="system-preferences">System Preferences</div>
+                <div class="dropdown-item" id="sleep">Sleep</div>
+                <div class="dropdown-item" id="restart">Restart</div>
+                <div class="dropdown-item" id="shut-down">Shut Down</div>
+                <div class="dropdown-item" id="change-wallpaper">Change Wallpaper</div>
+            </div>
+        </div>
+        <div class="menu">File</div>
+        <div class="menu">Edit</div>
+        <div class="menu">View</div>
+        <div class="menu">Go</div>
+        <div class="menu">Window</div>
+        <div class="menu">Help</div>
+        
+        <!-- Иконки статуса -->
+        <div class="status-icons">
+            <div class="status-icon"><i class="fas fa-wifi"></i></div>
+            <div class="status-icon"><i class="fas fa-battery-full"></i></div>
+            <div class="status-icon"><i class="fas fa-clock"></i></div>
+        </div>
+    </div>
+
+    <!-- Рабочий стол -->
+    <div id="desktop">
+        <!-- Иконка "Calendar" -->
+        <div class="icon" data-app="app1">
+            <i class="fas fa-calendar-alt fa-2x"></i>
+            <span>Calendar</span>
+        </div>
+        <!-- Иконка "Mail" -->
+        <div class="icon" data-app="app2">
+            <i class="fas fa-envelope fa-2x"></i>
+            <span>Mail</span>
+        </div>
+        <!-- Иконка "Notes" -->
+        <div class="icon" data-app="app3">
+            <i class="fas fa-sticky-note fa-2x"></i>
+            <span>Notes</span>
+        </div>
+        <!-- Добавьте дополнительные иконки здесь -->
+    </div>
+
+    <!-- Dock -->
+    <div id="dock">
+        <div class="dock-icon" data-app="app1">
+            <i class="fas fa-calendar-alt fa-2x"></i>
+        </div>
+        <div class="dock-icon" data-app="app2">
+            <i class="fas fa-envelope fa-2x"></i>
+        </div>
+        <div class="dock-icon" data-app="app3">
+            <i class="fas fa-sticky-note fa-2x"></i>
+        </div>
+        <!-- Добавьте дополнительные иконки Dock здесь -->
+    </div>
+
+    <!-- Окна приложений -->
+    <!-- Окно "Calendar" -->
+    <div class="app-window" id="app1">
+        <div class="title-bar">
+            <div class="title">Calendar</div>
+            <div class="window-controls">
+                <span class="minimize" onclick="windowManager.minimize('app1')"><i class="fas fa-window-minimize"></i></span>
+                <span class="close" onclick="windowManager.close('app1')"><i class="fas fa-times"></i></span>
+            </div>
+        </div>
+        <div class="content">
+            <h2>Calendar Application</h2>
+            <!-- Содержимое приложения -->
+        </div>
+    </div>
+
+    <!-- Окно "Mail" -->
+    <div class="app-window" id="app2">
+        <div class="title-bar">
+            <div class="title">Mail</div>
+            <div class="window-controls">
+                <span class="minimize" onclick="windowManager.minimize('app2')"><i class="fas fa-window-minimize"></i></span>
+                <span class="close" onclick="windowManager.close('app2')"><i class="fas fa-times"></i></span>
+            </div>
+        </div>
+        <div class="content">
+            <h2>Mail Application</h2>
+            <!-- Содержимое приложения -->
+        </div>
+    </div>
+
+    <!-- Окно "Notes" -->
+    <div class="app-window" id="app3">
+        <div class="title-bar">
+            <div class="title">Notes</div>
+            <div class="window-controls">
+                <span class="minimize" onclick="windowManager.minimize('app3')"><i class="fas fa-window-minimize"></i></span>
+                <span class="close" onclick="windowManager.close('app3')"><i class="fas fa-times"></i></span>
+            </div>
+        </div>
+        <div class="content">
+            <h2>Notes Application</h2>
+            <textarea id="notes-textarea" placeholder="Type your notes here..."></textarea>
+        </div>
+    </div>
+
+    <!-- Системные уведомления -->
+    <div id="notifications"></div>
+
+    <!-- Контекстное меню -->
+    <div id="context-menu" class="hidden">
+        <div class="context-item">Open</div>
+        <div class="context-item">Rename</div>
+        <div class="context-item">Delete</div>
+    </div>
+
+    <!-- Подключение библиотек -->
+    <script src="libs/gsap.min.js"></script>
+    <script src="libs/interact.min.js"></script>
+    <script src="js/windowManager.js" type="module"></script>
+    <script src="js/menuBar.js" type="module"></script>
+    <script src="js/notifications.js" type="module"></script>
+    <script src="js/contextMenu.js" type="module"></script>
+    <script src="js/main.js" type="module"></script>
+</body>
+</html>
